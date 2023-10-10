@@ -27,7 +27,7 @@ class DB:
         conn.commit()
         conn.close()
 
-    def read_value(self):
+    def read_all_values(self):
         conn = sqlite3.connect(self.CONST_DATABASE_NAME)
         cur = conn.execute("select * from users")
         print("select * from " + self.CONST_TABLE_NAME)
@@ -35,6 +35,9 @@ class DB:
         for i in cur:
             print(i[0], " ", i[1], " ", i[2])
         conn.close()
+        
+    def read_value_from_id(self, id):
+        pass
 
     def update_value(self):
         pass
