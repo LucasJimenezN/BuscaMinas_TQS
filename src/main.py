@@ -5,4 +5,4 @@ if __name__ == '__main__':
 
     database.create_table()
     #database.add_values("Lucas", 1000)
-    #database.get_data()
+    database.read_all_values()

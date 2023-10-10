@@ -37,7 +37,13 @@ class DB:
         conn.close()
         
     def read_value_from_id(self, id):
-        pass
+        data = None
+        if id is not None:
+            if isinstance(id, int):
+                # Here we get the value if possible
+                pass
+
+        return data
 
     def update_value(self):
         pass
