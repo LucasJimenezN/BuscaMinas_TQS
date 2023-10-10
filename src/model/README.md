@@ -1,0 +1,1 @@
+# The model is used to manage the data.
