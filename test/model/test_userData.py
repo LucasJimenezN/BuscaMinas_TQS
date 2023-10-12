@@ -27,7 +27,8 @@ class MyTestCase(unittest.TestCase):
         user = User()
         self.assertFalse(user.get_data_from_id(""), "Wrong parameter, str.")
         self.assertFalse(user.get_data_from_id(10000), "Id not found.")
-        self.assertEqual(user.get_data_from_id(1), [1, "Lucas", 1000])
+        self.assertEqual(user.get_data_from_id(1), [(1, "Lucas", 1000)])
+        self.assertEqual(user.get_data_from_id(2), [(2, "Saul", 100)])
 
 
 if __name__ == '__main__':
