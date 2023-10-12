@@ -8,6 +8,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(user.get_name(), None, "Return is not the same")
         user.set_name("Lucas")
         self.assertEqual(user.get_name(), "Lucas", "Set name not working")
+        user.set_name("Saul")
+        self.assertEqual(user.get_name(), "Saul", "Set name not working")
+
+    def test_get_set_score(self):
+        pass
 
 
 

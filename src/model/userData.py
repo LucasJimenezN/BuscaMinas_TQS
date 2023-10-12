@@ -8,4 +8,4 @@ class User:
         return self.__name
 
     def set_name(self, name):
-        pass
+        self.__name = name
