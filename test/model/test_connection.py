@@ -14,6 +14,7 @@ class MyTestCase(unittest.TestCase):
         self.assertFalse(DB.read_value_from_id(self, "string"), "String passed as parameter")
         self.assertFalse(DB.read_value_from_id(self, 10.0), "Float passed as parameter")
         self.assertFalse(DB.read_value_from_id(self, 1000), "Id not found")
+        self.assertEqual(DB.read_value_from_id(self, 1), [(1, "Lucas", 1000)], "Data not fetched")
 
 
 if __name__ == '__main__':

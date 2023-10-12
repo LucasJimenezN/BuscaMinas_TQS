@@ -42,8 +42,9 @@ class DB:
         if id is not None:
             if isinstance(id, int):
                 # Here we get the value if possible
-                conn = sqlite3.connect(self.CONST_DATABASE_NAME)
-                cur = conn.execute("select id, user_name, user_score from users where id=?", (id))
+                conn = (sqlite3.connect
+                        (r"/Users/lucasjimeneznunez/Desktop/UAB/4t/TQS/Practicas/P1/Project_Python/src/model/data.db"))
+                cur = conn.execute("select * from users where id=?", (id,))
 
                 result = cur.fetchall()
                 cur.close()
