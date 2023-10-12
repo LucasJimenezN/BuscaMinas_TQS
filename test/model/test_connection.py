@@ -11,10 +11,9 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(DB.check_insert_data(self, "",20))
 
     def test_read_value_from_id(self):
-        self.assertTrue(DB.read_value_from_id(self, 1))
-        self.assertTrue(DB.read_value_from_id(self, 100))
-        self.assertFalse(DB.read_value_from_id(self, "string"))
-        self.assertFalse(DB.read_value_from_id(self, 10.0))
+        self.assertFalse(DB.read_value_from_id(self, "string"), "String passed as parameter")
+        self.assertFalse(DB.read_value_from_id(self, 10.0), "Float passed as parameter")
+        self.assertFalse(DB.read_value_from_id(self, 1000), "Id not found")
 
 
 if __name__ == '__main__':

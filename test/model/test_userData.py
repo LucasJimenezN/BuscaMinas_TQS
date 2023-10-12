@@ -23,6 +23,11 @@ class MyTestCase(unittest.TestCase):
         user.set_score("Name")
         self.assertEqual(user.get_score(), 1000, "Set score modified score for a string")
 
+    def test_init(self):
+        user = User()
+        self.assertFalse(user.get_data_from_id(""), "Wrong parameter, str.")
+        self.assertFalse(user.get_data_from_id(10000), "Id not found.")
+        self.assertEqual(user.get_data_from_id(1), [1, "Lucas", 1000])
 
 
 if __name__ == '__main__':

@@ -1,9 +1,10 @@
 import sqlite3
 from itertools import islice
 
-
 class DB:
-    CONST_DATABASE_NAME = "data.db"
+    #Here we should change the databse path if saul or lucas is executing
+    LUCAS_DATABASE_PATH = r"/Users/lucasjimeneznunez/Desktop/UAB/4t/TQS/Practicas/P1/Project_Python/src/model/data.db"
+    CONST_DATABASE_NAME = LUCAS_DATABASE_PATH
     CONST_TABLE_NAME = 'users'
 
     def create_table(self):
@@ -41,9 +42,16 @@ class DB:
         if id is not None:
             if isinstance(id, int):
                 # Here we get the value if possible
-                pass
+                conn = sqlite3.connect(self.CONST_DATABASE_NAME)
+                cur = conn.execute("select id, user_name, user_score from users where id=?", (id))
 
-        return data
+                result = cur.fetchall()
+                cur.close()
+                conn.close()
+
+                if result is not None:
+                    return result
+        return False
 
     def update_value(self):
         pass

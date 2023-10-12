@@ -1,6 +1,7 @@
-
+from src.model.connection import DB
 
 class User:
+    __id = None
     __name = None
     __score = None
 
@@ -17,3 +18,11 @@ class User:
     def set_score(self, score):
         if isinstance(score, int):
             self.__score = score
+
+"""
+    def get_data_from_id(self, id):
+        if isinstance(id, int):
+            db = DB()
+            return True
+        return False     
+"""
