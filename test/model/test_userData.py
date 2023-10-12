@@ -10,9 +10,18 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(user.get_name(), "Lucas", "Set name not working")
         user.set_name("Saul")
         self.assertEqual(user.get_name(), "Saul", "Set name not working")
+        user.set_name(10)
+        self.assertEqual(user.get_name(), "Saul", "Set name changed name for an integer")
 
     def test_get_set_score(self):
-        pass
+        user = User()
+        self.assertEqual(user.get_score(), None, "Return is not the same")
+        user.set_score(100)
+        self.assertEqual(user.get_score(), 100, "Set score not working")
+        user.set_score(1000)
+        self.assertEqual(user.get_score(), 1000, "Set score not working")
+        user.set_score("Name")
+        self.assertEqual(user.get_score(), 1000, "Set score modified score for a string")
 
 
 

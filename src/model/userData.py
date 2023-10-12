@@ -8,4 +8,12 @@ class User:
         return self.__name
 
     def set_name(self, name):
-        self.__name = name
+        if isinstance(name, str):
+            self.__name = name
+
+    def get_score(self):
+        return self.__score
+
+    def set_score(self, score):
+        if isinstance(score, int):
+            self.__score = score
