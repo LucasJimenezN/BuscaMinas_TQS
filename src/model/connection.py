@@ -2,9 +2,8 @@ import sqlite3
 from itertools import islice
 
 class DB:
-    #Here we should change the databse path if saul or lucas is executing
-    LUCAS_DATABASE_PATH = r"/Users/lucasjimeneznunez/Desktop/UAB/4t/TQS/Practicas/P1/Project_Python/src/model/data.db"
-    CONST_DATABASE_NAME = LUCAS_DATABASE_PATH
+
+    CONST_DATABASE_NAME = r"../model/data.db"
     CONST_TABLE_NAME = 'users'
 
     def create_table(self):
