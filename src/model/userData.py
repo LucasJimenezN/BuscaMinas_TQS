@@ -1,5 +1,6 @@
 from src.model.connection import DB
 
+
 class User:
     __id = None
     __name = None
