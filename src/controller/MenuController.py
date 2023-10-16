@@ -1,6 +1,6 @@
 from src.view.PlayingMenu import PlayingMenu as PM
 from src.view.RankingMenu import RankingMenu as RM
-
+from src.controller.Exit import end_execution
 
 class MenuController:
 
@@ -17,4 +17,6 @@ class MenuController:
             RM.show_ranking_menu(self)
         if option == 3:
             print(f"Closing function")
+            end_execution()
+
         return True;
