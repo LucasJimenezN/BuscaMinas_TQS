@@ -1,5 +1,5 @@
-from src.view.PlayingMenu import PlayingMenu as PM
-from src.view.RankingMenu import RankingMenu as RM
+from src.view.PlayingMenuView import PlayingMenu as PM
+from src.view.RankingMenuView import RankingMenu as RM
 from src.controller.Exit import end_execution
 
 class MenuController:
