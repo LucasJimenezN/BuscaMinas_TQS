@@ -1,4 +1,4 @@
-from src.controller.MenuController import MenuController as MC
+from ...src.controller.MenuController import MenuController as MC
 
 class main_menu:
 

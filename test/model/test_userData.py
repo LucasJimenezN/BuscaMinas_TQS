@@ -1,5 +1,5 @@
 import unittest
-from src.model.userData import User
+from ...src.model.userData import User
 
 
 class MyTestCase(unittest.TestCase):

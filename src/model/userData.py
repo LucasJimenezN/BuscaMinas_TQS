@@ -1,4 +1,4 @@
-from src.model.connection import DB
+from ...src.model.connection import DB
 
 
 class User:

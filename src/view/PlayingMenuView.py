@@ -1,4 +1,3 @@
-
 class PlayingMenu:
 
     def show_playing_menu(self):

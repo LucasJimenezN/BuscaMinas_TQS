@@ -1,5 +1,5 @@
 import unittest
-from src.controller.PlayingMenuController import PlayingMenuContoller as PMC
+from ...src.controller.PlayingMenuController import PlayingMenuController as PMC
 
 class MyTestCase(unittest.TestCase):
     def test_handle_difficulty(self):

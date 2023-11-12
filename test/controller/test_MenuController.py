@@ -1,7 +1,8 @@
 import unittest
-from src.controller.MenuController import MenuController as MC
+from ...src.controller.MenuController import MenuController as MC
 
 class MyTestCase(unittest.TestCase):
+    # Not necessari
     def test_handlePrincipalInput(self):
         self.assertFalse(MC.handle_principal_input(self, "string"))
         self.assertFalse(MC.handle_principal_input(self, 10.0))

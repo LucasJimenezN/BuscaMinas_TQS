@@ -1,5 +1,5 @@
 import unittest
-from src.model.connection import DB
+from ...src.model.connection import DB
 
 
 class MyTestCase(unittest.TestCase):

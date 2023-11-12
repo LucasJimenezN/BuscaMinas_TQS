@@ -1,4 +1,4 @@
-class PlayingMenuContoller:
+class PlayingMenuController:
     difficulty = None
 
     def handle_difficulty(self, option):
