@@ -2,6 +2,7 @@ import unittest
 from ...src.model.boardData import Board
 from ...src.model.boardData import Tile
 
+
 class TestMinesweeper(unittest.TestCase):
     def test_tile(self):
         tile = Tile()
@@ -33,6 +34,6 @@ class TestMinesweeper(unittest.TestCase):
                     num_bombs = board.checkTile(i, j)
                     self.assertTrue(0 <= num_bombs <= 8)
 
+
 if __name__ == '__main__':
     unittest.main()
-

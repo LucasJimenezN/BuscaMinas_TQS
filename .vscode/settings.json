@@ -1,5 +1,10 @@
 {
     "python.analysis.extraPaths": [
         "./src/model"
-    ]
+    ],
+
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+      
 }
