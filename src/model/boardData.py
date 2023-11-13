@@ -3,6 +3,10 @@ import random
 class Tile:
     def __init__(self):
         self.is_bomb = False
+        self.is_revealed = False
+    
+    def reveal(self):
+        self.is_revealed = True
 
 class Board:
     def __init__(self, difficulty):
@@ -32,6 +36,13 @@ class Board:
 
         return board
     
+    def checkHidden(self, x, y):
+        if self.board[x][y].is_revealed:
+            return True
+        else:
+            return False
+
+
     def checkTile(self, x, y):
         if self.board[x][y].is_bomb:
             return False
@@ -43,3 +54,13 @@ class Board:
                     num_bombs += 1
 
         return num_bombs
+    
+    def get_tile(self, x, y):
+        return self.board[y][x]
+
+    def is_game_won(self):
+        for row in self.board:
+            for tile in row:
+                if not tile.is_bomb and not tile.is_revealed:
+                    return False
+        return True
