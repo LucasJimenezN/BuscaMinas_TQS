@@ -1,6 +1,5 @@
 from ..view.BoardView import BoardView
-from ..model.boardData import Board
-from ..model.boardData import Board
+
 
 class BoardController:
     def __init__(self, board):
@@ -14,7 +13,7 @@ class BoardController:
         tile = self.board.get_tile(x, y)
         tile.reveal()
 
-        if tile.is_mine:
+        if tile.is_bomb:
             self.view.display_loss_message()
         elif self.board.is_game_won():
             self.view.display_win_message()

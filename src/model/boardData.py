@@ -1,65 +1,75 @@
 import random
 
+
 class Tile:
     def __init__(self):
         self.is_bomb = False
         self.is_revealed = False
-    
+
     def reveal(self):
         self.is_revealed = True
 
+    def print(self):
+        if self.is_revealed and self.is_bomb:
+            return "X"
+        elif self.is_revealed and self.is_bomb == False:
+            return "O"
+        else:
+            return " "
+
+
 class Board:
     def __init__(self, difficulty):
+        self.size = 0
         self.difficulty = difficulty
-        self.board = self.initialise()
+        self.Tiles = self.initialise()
 
     def initialise(self):
         if self.difficulty == 1:
-            size = 6
+            self.size = 6
             num_bombs = 8
         elif self.difficulty == 2:
-            size = 8
+            self.size = 8
             num_bombs = 16
         elif self.difficulty == 3:
-            size = 10
+            self.size = 10
             num_bombs = 32
         else:
             raise ValueError("Invalid difficulty level. Choose between 1, 2, or 3.")
 
-        board = [[Tile() for _ in range(size)] for _ in range(size)]
+        Tiles = [[Tile() for _ in range(self.size)] for _ in range(self.size)]
 
-        bomb_positions = random.sample(range(size*size), num_bombs)
+        bomb_positions = random.sample(range(self.size * self.size), num_bombs)
         for pos in bomb_positions:
-            row = pos // size
-            col = pos % size
-            board[row][col].is_bomb = True
+            row = pos // self.size
+            col = pos % self.size
+            Tiles[row][col].is_bomb = True
 
-        return board
-    
+        return Tiles
+
     def checkHidden(self, x, y):
-        if self.board[x][y].is_revealed:
-            return True
-        else:
+        if self.Tiles[x][y].is_revealed:
             return False
-
+        else:
+            return True
 
     def checkTile(self, x, y):
-        if self.board[x][y].is_bomb:
+        if self.Tiles[x][y].is_bomb:
             return False
 
         num_bombs = 0
-        for i in range(max(0, x-1), min(len(self.board), x+2)):
-            for j in range(max(0, y-1), min(len(self.board[0]), y+2)):
-                if self.board[i][j].is_bomb:
+        for i in range(max(0, x - 1), min(len(self.Tiles), x + 2)):
+            for j in range(max(0, y - 1), min(len(self.Tiles[0]), y + 2)):
+                if self.Tiles[i][j].is_bomb:
                     num_bombs += 1
 
         return num_bombs
-    
+
     def get_tile(self, x, y):
-        return self.board[y][x]
+        return self.Tiles[y][x]
 
     def is_game_won(self):
-        for row in self.board:
+        for row in self.Tiles:
             for tile in row:
                 if not tile.is_bomb and not tile.is_revealed:
                     return False
