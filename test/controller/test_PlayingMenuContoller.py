@@ -1,6 +1,7 @@
 import unittest
 from ...src.controller.PlayingMenuController import PlayingMenuController as PMC
 
+
 class MyTestCase(unittest.TestCase):
     def test_handle_difficulty(self):
         self.assertFalse(PMC.handle_difficulty(self, "string"), "Invalid parameter type")
@@ -11,6 +12,7 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(PMC.handle_difficulty(self, 1), "Valid parameter")
         self.assertTrue(PMC.handle_difficulty(self, 2), "Valid parameter")
         self.assertTrue(PMC.handle_difficulty(self, 3), "Valid parameter")
+
 
 if __name__ == '__main__':
     unittest.main()
