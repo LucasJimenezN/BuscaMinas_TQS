@@ -1,10 +1,17 @@
-from ...src.model.connection import DB
+from src.model.connection import DB
 
 
 class User:
     __id = None
     __name = None
     __score = None
+
+    def get_id(self):
+        return self.__id
+
+    def set_id(self, id):
+        if isinstance(id, int):
+            self.__id = id
 
     def get_name(self):
         return self.__name
