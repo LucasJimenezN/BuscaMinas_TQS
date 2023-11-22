@@ -18,6 +18,13 @@ class DB:
         conn.close()
 
     def create_values(self, name, score):
+        if not isinstance(name, str):
+            print("Error: El nombre debe ser un string.")
+            return False
+        if not isinstance(score, int):
+            print("Error: La puntuación debe ser un entero.")
+            return False
+
         try:
             conn = sqlite3.connect(self.CONST_DATABASE_NAME)
             cursor = conn.cursor()

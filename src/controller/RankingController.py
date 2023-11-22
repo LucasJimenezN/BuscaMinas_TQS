@@ -6,6 +6,9 @@ class RankingController:
     __ranking_users = []
     __db = DB()
 
+    def get_ranking_users(self):
+        return self.__ranking_users
+
     def get_ranking(self):
         try:
             aux = self.__db.get_all_values()
@@ -18,9 +21,10 @@ class RankingController:
         except Exception as e:
             print(f"Error: {e}")
             return False
+        self.sort_ranking()
         return True
 
-    def print_ranking(self):
-        for users in self.__ranking_users:
-            print(f"Id: {users.get_id()} / Name: {users.get_name()} / Score: {users.get_score()}")
+    def sort_ranking(self):
+        self.__ranking_users.sort(key=lambda user: user.get_score(), reverse=True)
+
 

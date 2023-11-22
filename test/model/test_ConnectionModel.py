@@ -21,6 +21,7 @@ class TestDB(unittest.TestCase):
     def test_create_values(self):
         self.db.create_table()
         self.assertTrue(self.db.create_values("Alice", 90))
+        self.assertFalse(self.db.create_values(10,""))
 
     def test_read_all_values(self):
         self.db.create_table()
@@ -46,6 +47,7 @@ class TestDB(unittest.TestCase):
         self.db.create_table()
         self.db.create_values("Alice", 90)
         self.assertTrue(self.db.delete_value_from_id(1))
+        self.assertTrue(self.db.delete_value_from_id(99999))
 
     def test_check_insert_data(self):
         self.assertTrue(self.db.check_insert_data("Alice", 90))
