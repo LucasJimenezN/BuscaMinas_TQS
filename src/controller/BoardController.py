@@ -15,14 +15,15 @@ class BoardController:
         while self.board.is_game_won() == False and self.board.is_game_lost == False:
             letter_tile = ord(input("Which colum do you want to pick: "))
             number_tile = int(input("Which row do you want to pick: "))
+            letter_tile = letter_tile - 65
             number_tile = number_tile - 1
             while not self.check_tile(letter_tile, number_tile):
                 print("Wrong input, please try again: ")
                 letter_tile = ord(input("Which colum do you want to pick: "))
                 number_tile = int(input("Which row do you want to pick: "))
+                letter_tile = letter_tile - 65
                 number_tile = number_tile - 1
 
-            letter_tile = letter_tile - 65
 
     def check_tile(self, letter, number):
         if letter < 0 or letter > self.board.size:
