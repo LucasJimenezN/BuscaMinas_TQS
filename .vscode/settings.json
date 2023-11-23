@@ -5,13 +5,10 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./test",
+        "./test/controller",
         "-p",
-        "test_*.py"
+        "*test*.py"
     ],
     "python.testing.pytestEnabled": false,
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestArgs": [
-        "test"
-    ]
+    "python.testing.unittestEnabled": true
 }
