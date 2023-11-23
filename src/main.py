@@ -1,7 +1,5 @@
-from ..src.model.connection import DB
-from ..src.view.MainMenuView import main_menu as MM
+from src.controller.RankingController import RankingController
+from src.view.RankingMenuView import print_ranking
 
 if __name__ == '__main__':
-
-    menu = MM()
-    menu.print_select_option()
+    pass

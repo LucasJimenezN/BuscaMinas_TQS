@@ -1,6 +1,7 @@
 import unittest
 from ...src.controller.MenuController import MenuController as MC
 
+
 class MyTestCase(unittest.TestCase):
     # Not necessari
     def test_handlePrincipalInput(self):
@@ -12,8 +13,6 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(MC.handle_principal_input(self, 1))
         self.assertTrue(MC.handle_principal_input(self, 2))
         self.assertTrue(MC.handle_principal_input(self, 3))
-
-
 
 
 if __name__ == '__main__':

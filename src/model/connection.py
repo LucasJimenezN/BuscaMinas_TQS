@@ -1,9 +1,8 @@
 import sqlite3
-from itertools import islice
+
 
 class DB:
-
-    CONST_DATABASE_NAME = r"../model/data.db"
+    CONST_DATABASE_NAME = "model/data.db"
     CONST_TABLE_NAME = 'users'
 
     def create_table(self):
@@ -11,38 +10,71 @@ class DB:
         try:
             conn.execute("""create table users (
                               id integer primary key autoincrement,
-                              user_name text unique,
+                              user_name text,
                               user_score integer
                         )""")
-            print("Table created")
         except sqlite3.OperationalError:
-            print("Table already exist")
+            pass
         conn.close()
 
     def create_values(self, name, score):
-        conn = sqlite3.connect(self.CONST_DATABASE_NAME)
-        cursor = conn.cursor()
-        insert_query = 'INSERT INTO users (user_name, user_score) VALUES (?, ?)'
-        cursor.execute(insert_query, (name, score))
-        conn.commit()
-        conn.close()
+        if not isinstance(name, str):
+            print("Error: El nombre debe ser un string.")
+            return False
+        if not isinstance(score, int):
+            print("Error: La puntuación debe ser un entero.")
+            return False
+
+        try:
+            conn = sqlite3.connect(self.CONST_DATABASE_NAME)
+            cursor = conn.cursor()
+            insert_query = 'INSERT INTO users (user_name, user_score) VALUES (?, ?)'
+            cursor.execute(insert_query, (name, score))
+            conn.commit()
+        except sqlite3.IntegrityError:
+            print("Error: El valor que intentas insertar en 'user_name' ya existe en la base de datos.")
+            return False
+        except sqlite3.Error as e:
+            print(f"Error: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
+        return True
 
     def read_all_values(self):
-        conn = sqlite3.connect(self.CONST_DATABASE_NAME)
-        cur = conn.execute("select * from users")
-        print("select * from " + self.CONST_TABLE_NAME)
-        # print data using cursor object
-        for i in cur:
-            print(i[0], " ", i[1], " ", i[2])
-        conn.close()
-        
+        try:
+            conn = sqlite3.connect(self.CONST_DATABASE_NAME)
+            cur = conn.execute("select * from users")
+            print("select * from " + self.CONST_TABLE_NAME)
+            # print data using cursor object
+            for i in cur:
+                print(i[0], " ", i[1], " ", i[2])
+        except sqlite3.Error as e:
+            print(f"Error: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
+        return True
+
+    def get_all_values(self):
+        try:
+            conn = sqlite3.connect(self.CONST_DATABASE_NAME)
+            cur = conn.execute("select * from users")
+            data = cur.fetchall()
+            conn.close()
+        except sqlite3.Error as e:
+            return False
+        return data
+
     def read_value_from_id(self, id):
         data = None
         if id is not None:
             if isinstance(id, int):
                 # Here we get the value if possible
                 conn = (sqlite3.connect
-                        (r"/Users/lucasjimeneznunez/Desktop/UAB/4t/TQS/Practicas/P1/Project_Python/src/model/data.db"))
+                        (self.CONST_DATABASE_NAME))
                 cur = conn.execute("select * from users where id=?", (id,))
 
                 result = cur.fetchall()
@@ -53,14 +85,21 @@ class DB:
                     return result
         return False
 
-    def update_value(self):
-        pass
-
-    def delete_value(self):
-        pass
-
-    def delete_value(self, id):
-        pass
+    def delete_value_from_id(self, id):
+        if id is not None and isinstance(id, int):
+            try:
+                conn = sqlite3.connect(self.CONST_DATABASE_NAME)
+                cursor = conn.cursor()
+                delete_query = 'DELETE FROM users WHERE id = ?'
+                cursor.execute(delete_query, (id,))
+                conn.commit()
+            except sqlite3.Error as e:
+                print(f"Error: {e}")
+                return False
+            finally:
+                if conn:
+                    conn.close()
+            return True
 
     def check_insert_data(self, name, score):
         if name is not None and score is not None:
