@@ -22,7 +22,8 @@ class Board:
     def __init__(self, difficulty):
         self.size = 0
         self.difficulty = difficulty
-        self.Tiles = self.initialise()
+        self.tiles = self.initialise()
+        self.is_game_lost = False
 
     def initialise(self):
         if self.difficulty == 1:
@@ -45,31 +46,33 @@ class Board:
             col = pos % self.size
             Tiles[row][col].is_bomb = True
 
+        self.tiles = Tiles
         return Tiles
 
     def checkHidden(self, x, y):
-        if self.Tiles[x][y].is_revealed:
+        if self.tiles[x][y].is_revealed:
             return False
         else:
             return True
 
     def checkTile(self, x, y):
-        if self.Tiles[x][y].is_bomb:
+        if self.tiles[x][y].is_bomb:
+            self.is_game_lost = True
             return False
 
         num_bombs = 0
-        for i in range(max(0, x - 1), min(len(self.Tiles), x + 2)):
-            for j in range(max(0, y - 1), min(len(self.Tiles[0]), y + 2)):
-                if self.Tiles[i][j].is_bomb:
+        for i in range(max(0, x - 1), min(len(self.tiles), x + 2)):
+            for j in range(max(0, y - 1), min(len(self.tiles[0]), y + 2)):
+                if self.tiles[i][j].is_bomb:
                     num_bombs += 1
 
         return num_bombs
 
     def get_tile(self, x, y):
-        return self.Tiles[y][x]
+        return self.tiles[y][x]
 
     def is_game_won(self):
-        for row in self.Tiles:
+        for row in self.tiles:
             for tile in row:
                 if not tile.is_bomb and not tile.is_revealed:
                     return False

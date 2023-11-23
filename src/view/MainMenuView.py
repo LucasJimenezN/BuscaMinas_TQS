@@ -1,7 +1,7 @@
-from ...src.controller.MenuController import MenuController as MC
+from src.controller.MenuController import MenuController as MC
 
 
-class main_menu:
+class MainMenu:
 
     def print_select_option(self):
         print(f"Bienvenido al buscaminas de Lucas y Saul!!")

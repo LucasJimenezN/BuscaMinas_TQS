@@ -1,5 +1,5 @@
-from src.controller.RankingController import RankingController
-from src.view.RankingMenuView import print_ranking
-
+from src.view.BoardView import BoardView
+from src.view.MainMenuView import MainMenu
 if __name__ == '__main__':
-    pass
+    menu = MainMenu()
+    menu.print_select_option()
