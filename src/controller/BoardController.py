@@ -23,7 +23,7 @@ class BoardController:
                 number_tile = int(input("Which row do you want to pick: "))
                 letter_tile = letter_tile - 65
                 number_tile = number_tile - 1
-
+            self.reveal_tile(letter_tile, number_tile)
 
     def check_tile(self, letter, number):
         if letter < 0 or letter > self.board.size:
@@ -34,10 +34,13 @@ class BoardController:
 
     def reveal_tile(self, x, y):
         tile = self.board.get_tile(x, y)
+        if(tile.is_revealed == True):
+            self.view.display_already_revealed()
         tile.reveal()
 
         if tile.is_bomb:
             self.view.display_loss_message()
+            self.board.is_game_lost = True;
         elif self.board.is_game_won():
             self.view.display_win_message()
         else:

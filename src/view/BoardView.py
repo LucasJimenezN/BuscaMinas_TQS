@@ -16,7 +16,8 @@ class BoardView:
             for tile in row:
                 print(tile.print(), end=' ')
             print()
-
+    def display_already_revealed(self):
+        print("Tile already revealed! Please select another")
     def display_loss_message(self):
         print("You hit a mine! Game over.")
 
