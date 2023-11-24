@@ -24,7 +24,6 @@ class DB:
         if not isinstance(score, int):
             print("Error: La puntuación debe ser un entero.")
             return False
-
         try:
             conn = sqlite3.connect(self.CONST_DATABASE_NAME)
             cursor = conn.cursor()

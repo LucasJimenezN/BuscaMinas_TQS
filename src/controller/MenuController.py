@@ -1,6 +1,7 @@
 from src.view.PlayingMenuView import PlayingMenu as PM
-from src.view.RankingMenuView import print_ranking as RM
+from src.view.RankingMenuView import print_ranking
 from src.controller.Exit import end_execution
+from src.controller.RankingController import RankingController
 
 
 class MenuController:
@@ -15,7 +16,9 @@ class MenuController:
         if option == 1:
             PM.show_playing_menu(self)
         if option == 2:
-            RM.show_ranking_menu(self)
+            rank = RankingController()
+            rank.get_ranking()
+            print_ranking(rank)
         if option == 3:
             print(f"Closing function")
             end_execution()

@@ -6,6 +6,7 @@ class BoardController:
     def __init__(self, difficulty):
         self.board = Board(difficulty)
         self.view = BoardView(self)
+        self.score = 0
 
     def start_game(self):
         self.view.display_board()
@@ -44,4 +45,5 @@ class BoardController:
         elif self.board.is_game_won():
             self.view.display_win_message()
         else:
+            self.score = self.score + 10
             self.view.display_board()
