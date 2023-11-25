@@ -1,43 +1,50 @@
 import unittest
 from unittest.mock import Mock, patch, MagicMock, call
 from src.controller.BoardController import BoardController
+from src.model.boardData import Board
 
 
 class TestBoardController(unittest.TestCase):
     def setUp(self):
-        # Mock object: Creando un objeto simulado de BoardController
-        self.board_controller = BoardController(1)
+        self.board = Board(1)
 
-    @patch('src.controller.BoardController.input', create=True)
-    @patch('src.model.userData.User.add_user', return_value=None)
-    def test_play_game(self, mocked_add_user, mocked_input):
-        # Particiones equivalentes: Preparando los datos de prueba
-        mocked_input.side_effect = ['A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1']
+    # Pairwise testing
+    def test_pairwise(self):
+        self.board = Board(2)
+        self.assertEqual(len(self.board.tiles), 8)
+        self.assertEqual(len(self.board.tiles[0]), 8)
 
-        # Mock object: Simulando los métodos de la clase Board
-        self.board_controller.board.is_game_won = MagicMock(side_effect=[False] * 15 + [True])
-        self.board_controller.board.is_game_lost = False
+    # Statement coverage
+    def test_statement_coverage(self):
+        self.board = Board(3)
+        self.assertEqual(len(self.board.tiles), 10)
+        self.assertEqual(len(self.board.tiles[0]), 10)
 
-        # TDD: Llamando al método que estamos probando
-        self.board_controller.play_game()
+    # Decision coverage
+    def test_decision_coverage(self):
+        with self.assertRaises(ValueError):
+            self.board = Board(4)
 
-        # Statement Coverage, Decision Coverage, Condition Coverage: Verificando el resultado
-        self.board_controller.board.is_game_won.assert_has_calls([call()] * 16)
+    # Condition coverage
+    def test_condition_coverage(self):
+        self.board = Board(1)
+        self.board.tiles[0][0].is_bomb = True
+        self.assertFalse(self.board.checkTile(0, 0))
 
-    @patch('src.controller.BoardController.input', create=True)
-    def test_play_game_with_invalid_input(self, mocked_input):
-        # Valores límite y frontera: Preparando los datos de prueba
-        mocked_input.side_effect = ['Z', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1', 'A', '1']
+    # Path coverage
+    def test_path_coverage(self):
+        self.board = Board(1)
+        self.board.tiles[0][0].is_bomb = True
+        self.board.tiles[0][0].is_revealed = True
+        self.assertFalse(self.board.checkHidden(0, 0))
 
-        # Mock object: Simulando los métodos de la clase Board
-        self.board_controller.board.is_game_won = MagicMock(side_effect=[False] * 15 + [True])
-        self.board_controller.board.is_game_lost = False
-
-        # TDD: Llamando al método que estamos probando
-        self.board_controller.play_game()
-
-        # Statement Coverage, Decision Coverage, Condition Coverage: Verificando el resultado
-        self.board_controller.board.is_game_won.assert_has_calls([call()] * 16)
+    # Loop testing
+    def test_loop_testing(self):
+        self.board = Board(1)
+        for i in range(self.board.size):
+            for j in range(self.board.size):
+                self.board.tiles[i][j].is_bomb = True
+        self.assertTrue(self.board.is_game_won())
 
 if __name__ == '__main__':
     unittest.main()
