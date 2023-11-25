@@ -18,13 +18,16 @@ class BoardController:
             letter_tile = input("Which colum do you want to pick: ")
             number_tile = input("Which row do you want to pick: ")
             while not (letter_tile.isalpha() and len(letter_tile) == 1 and number_tile.isdigit() and
-            letter_tile.isupper()):
+                       letter_tile.isupper()):
                 print("Wrong input, please try again: ")
                 letter_tile = input("Which colum do you want to pick: ")
                 number_tile = input("Which row do you want to pick: ")
             letter_tile = ord(letter_tile) - 65
             number_tile = int(number_tile) - 1
-            self.reveal_tile(letter_tile, number_tile)
+            if 0 <= letter_tile < self.board.size and 0 <= number_tile < self.board.size:
+                self.reveal_tile(letter_tile, number_tile)
+            else:
+                print("Invalid tile. Please try again.")
 
     def check_tile(self, letter, number):
         if letter < 0 or letter > self.board.size:

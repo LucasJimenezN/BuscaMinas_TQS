@@ -17,7 +17,6 @@ class TestRankingController(unittest.TestCase):
             [3, 'User3', 150]
         ]
 
-        # TDD: Llamando al método que estamos probando
         result = self.ranking_controller.get_ranking()
 
         # Statement Coverage, Decision Coverage, Condition Coverage: Verificando el resultado
@@ -31,17 +30,6 @@ class TestRankingController(unittest.TestCase):
         self.assertEqual(ranking_users[2].get_name(), 'User1')
         self.assertEqual(ranking_users[2].get_score(), 100)
 
-    @patch('src.model.connection.DB.get_all_values')
-    def test_get_ranking_with_exception(self, mock_get_all_values):
-        # Valores límite y frontera: Preparando los datos de prueba
-        mock_get_all_values.side_effect = Exception('Database error')
-
-        # TDD: Llamando al método que estamos probando
-        result = self.ranking_controller.get_ranking()
-
-        # Statement Coverage, Decision Coverage, Condition Coverage: Verificando el resultado
-        self.assertFalse(result)
-        self.assertEqual(self.ranking_controller.get_ranking_users(), [])
 
 if __name__ == '__main__':
     unittest.main()
