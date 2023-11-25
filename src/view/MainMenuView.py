@@ -9,4 +9,5 @@ class MainMenu:
         print(f"2 - Ver ranking!")
         print(f"3 - Salir")
         user_input = int(input(f"Seleccione una opción: "))
+        # Handle user input
         MC.handle_principal_input(self, user_input)
