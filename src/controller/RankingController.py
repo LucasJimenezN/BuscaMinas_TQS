@@ -5,7 +5,6 @@ from src.model.userData import User
 class RankingController:
     __ranking_users = []
     __db = DB()
-
     def get_ranking_users(self):
         return self.__ranking_users
 
