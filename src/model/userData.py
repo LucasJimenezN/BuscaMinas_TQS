@@ -43,3 +43,9 @@ class User:
                 return result
 
         return False
+
+    def add_user(self, score):
+        name = input("Tell me your name: ")
+        print(f"{name} got: {score}!")
+        db = DB()
+        db.create_values(name, score)

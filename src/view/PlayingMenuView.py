@@ -1,4 +1,5 @@
 from src.controller.BoardController import BoardController
+
 class PlayingMenu:
 
     def show_playing_menu(self):
@@ -14,4 +15,3 @@ class PlayingMenu:
 
         board_controller = BoardController(user_input)
         board_controller.start_game()
-

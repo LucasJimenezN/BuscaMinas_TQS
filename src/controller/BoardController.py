@@ -1,5 +1,6 @@
 from src.view.BoardView import BoardView
 from src.model.boardData import Board
+from src.model.userData import User
 
 
 class BoardController:
@@ -20,7 +21,8 @@ class BoardController:
             number_tile = number_tile - 1
             while not self.check_tile(letter_tile, number_tile):
                 print("Wrong input, please try again: ")
-                letter_tile = ord(input("Which colum do you want to pick: "))
+                letter_tile = input("Which colum do you want to pick: ")
+                if letter_tile.l
                 number_tile = int(input("Which row do you want to pick: "))
                 letter_tile = letter_tile - 65
                 number_tile = number_tile - 1
@@ -42,10 +44,12 @@ class BoardController:
         if tile.is_bomb:
             self.view.display_board()
             self.view.display_loss_message()
+            User.add_user(self, self.score)
             self.board.is_game_lost = True;
         elif self.board.is_game_won():
             self.view.display_board()
             self.view.display_win_message()
+            User.add_user(self, self.score)
         else:
             self.score = self.score + 10
             self.view.display_board()
