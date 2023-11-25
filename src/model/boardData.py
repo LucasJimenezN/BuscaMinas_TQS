@@ -5,6 +5,7 @@ class Tile:
     def __init__(self):
         self.is_bomb = False
         self.is_revealed = False
+        self.bombs = 0
 
     def reveal(self):
         self.is_revealed = True
@@ -13,7 +14,7 @@ class Tile:
         if self.is_revealed and self.is_bomb:
             return "X"
         elif self.is_revealed and self.is_bomb == False:
-            return "O"
+            return self.bombs
         else:
             return " "
 
@@ -45,8 +46,10 @@ class Board:
             row = pos // self.size
             col = pos % self.size
             Tiles[row][col].is_bomb = True
-
-        self.tiles = Tiles
+        for i in range(self.size):
+            for j in range(self.size):
+                bomb = self.checkBombs(Tiles, i, j)
+                Tiles[i][j].bombs = bomb
         return Tiles
 
     def checkHidden(self, x, y):
@@ -64,6 +67,15 @@ class Board:
         for i in range(max(0, x - 1), min(len(self.tiles), x + 2)):
             for j in range(max(0, y - 1), min(len(self.tiles[0]), y + 2)):
                 if self.tiles[i][j].is_bomb:
+                    num_bombs += 1
+
+        return num_bombs
+
+    def checkBombs(self, Tiles, x, y):
+        num_bombs = 0
+        for i in range(max(0, x - 1), min(self.size, x + 2)):
+            for j in range(max(0, y - 1), min(self.size, y + 2)):
+                if Tiles[i][j].is_bomb:
                     num_bombs += 1
 
         return num_bombs

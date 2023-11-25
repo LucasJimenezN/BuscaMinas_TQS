@@ -40,9 +40,11 @@ class BoardController:
         tile.reveal()
 
         if tile.is_bomb:
+            self.view.display_board()
             self.view.display_loss_message()
             self.board.is_game_lost = True;
         elif self.board.is_game_won():
+            self.view.display_board()
             self.view.display_win_message()
         else:
             self.score = self.score + 10
