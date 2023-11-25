@@ -20,7 +20,7 @@ class MenuController:
             rank.get_ranking()
             print_ranking(rank)
         if option == 3:
-            print(f"Closing function")
+            print(f"Gracias por jugar! :D")
             end_execution()
 
         return True;
