@@ -34,13 +34,26 @@ class TestTile(unittest.TestCase):
 class TestBoard(unittest.TestCase):
     def setUp(self):
         self.board = Board(1)
+        self.board2 = Board(2)
+        self.board3 = Board(3)
 
-    def test_board_initialization(self):
+    def test_board_initialization_1(self):
         self.assertEqual(self.board.size, 6)
         self.assertFalse(self.board.is_game_lost)
         self.assertEqual(len(self.board.tiles), 6)
         self.assertEqual(len(self.board.tiles[0]), 6)
 
+    def test_board_initialization_2(self):
+        self.assertEqual(self.board2.size, 8)
+        self.assertFalse(self.board2.is_game_lost)
+        self.assertEqual(len(self.board2.tiles), 8)
+        self.assertEqual(len(self.board2.tiles[0]), 8)
+
+    def test_board_initialization_3(self):
+        self.assertEqual(self.board3.size, 10)
+        self.assertFalse(self.board3.is_game_lost)
+        self.assertEqual(len(self.board3.tiles), 10)
+        self.assertEqual(len(self.board3.tiles[0]), 10)
     def test_check_hidden_tile(self):
         result = self.board.checkHidden(0, 0)
         self.assertTrue(result)
