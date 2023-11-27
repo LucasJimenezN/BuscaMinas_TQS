@@ -6,6 +6,11 @@ class User:
     __name = None
     __score = None
 
+    def __init__(self, id=None, name=None, score=None):
+        self.__id = id
+        self.__name = name
+        self.__score = score
+
     def get_id(self):
         return self.__id
 

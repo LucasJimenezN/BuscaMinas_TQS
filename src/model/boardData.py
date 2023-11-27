@@ -1,5 +1,6 @@
 import random
 
+
 class Tile:
     def __init__(self):
         self.is_bomb = False
