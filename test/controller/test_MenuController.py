@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from src.controller.MenuController import MenuController  # replace 'your_module' with the actual module name
+from src.controller.MenuController import MenuController
 
 
 class TestMenuController(unittest.TestCase):

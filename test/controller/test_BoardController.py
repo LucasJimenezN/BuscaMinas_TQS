@@ -1,50 +1,40 @@
 import unittest
-from unittest.mock import Mock, patch, MagicMock, call
-from src.controller.BoardController import BoardController
+from controller.BoardController import BoardController
 from src.model.boardData import Board
 
 
 class TestBoardController(unittest.TestCase):
     def setUp(self):
         self.board = Board(1)
+        self.controller = BoardController(self.board)
 
-    # Pairwise testing
-    def test_pairwise(self):
-        self.board = Board(2)
-        self.assertEqual(len(self.board.tiles), 8)
-        self.assertEqual(len(self.board.tiles[0]), 8)
+    def test_start_game(self):
+        self.controller.start_game()
+        for y in range(self.board.size):
+            for x in range(self.board.size):
+                 self.assertEqual(self.board.checkHidden(x,y), True)
 
-    # Statement coverage
-    def test_statement_coverage(self):
-        self.board = Board(3)
-        self.assertEqual(len(self.board.tiles), 10)
-        self.assertEqual(len(self.board.tiles[0]), 10)
 
-    # Decision coverage
-    def test_decision_coverage(self):
-        with self.assertRaises(ValueError):
-            self.board = Board(4)
+    def test_reveal_tile(self):
+        self.controller.reveal_tile(0, 0)
+        self.assertEqual(self.board.checkHidden(0,0), False)
 
-    # Condition coverage
-    def test_condition_coverage(self):
-        self.board = Board(1)
-        self.board.tiles[0][0].is_bomb = True
-        self.assertFalse(self.board.checkTile(0, 0))
+    def test_reveal_mine(self):
+        # First, place a mine at (0, 0)
+        self.board.get_tile(0, 0).is_mine = True
 
-    # Path coverage
-    def test_path_coverage(self):
-        self.board = Board(1)
-        self.board.tiles[0][0].is_bomb = True
-        self.board.tiles[0][0].is_revealed = True
-        self.assertFalse(self.board.checkHidden(0, 0))
+        self.controller.reveal_tile(0, 0)
+        self.assertEqual(self.board.is_game_won, False)
 
-    # Loop testing
-    def test_loop_testing(self):
-        self.board = Board(1)
-        for i in range(self.board.size):
-            for j in range(self.board.size):
-                self.board.tiles[i][j].is_bomb = True
-        self.assertTrue(self.board.is_game_won())
+
+    def test_reveal_all_tiles(self):
+        # Reveal all non-mine tiles
+        for y in range(self.board.size):
+            for x in range(self.board.size):
+                if not self.board.get_tile(x, y).is_mine:
+                    self.controller.reveal_tile(x, y)
+
+        self.assertEqual(self.board.is_game_won, True)
 
 if __name__ == '__main__':
     unittest.main()
