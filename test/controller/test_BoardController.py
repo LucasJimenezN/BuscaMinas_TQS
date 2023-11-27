@@ -24,6 +24,7 @@ class TestBoardController(unittest.TestCase):
             for x in range(self.controller.board.size):
                 if not self.controller.board.get_tile(x, y).is_bomb:
                     self.controller.reveal_tile_test(x, y)
+        self.assertTrue(self.controller.board.is_game_won())
 
     def test_check_tile(self):
         self.assertTrue(self.controller.check_tile(0, 0))
