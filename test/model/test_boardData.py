@@ -18,18 +18,11 @@ class TestTile(unittest.TestCase):
     def test_print_tile_unrevealed(self):
         result = self.tile.print()
         self.assertEqual(result, " ")
-        aux_tile = Tile()
-        aux_tile.is_revealed = True
-        result = aux_tile.print()
-        self.assertEqual(result, aux_tile.bombs)
-        aux_tile.is_bomb = True
-        result = aux_tile.print()
-        self.assertEqual(result, "X")
 
     def test_print_tile_revealed_not_bomb(self):
         self.tile.reveal()
         result = self.tile.print()
-        self.assertEqual(result, 0)
+        self.assertEqual(result, self.tile.bombs)
 
     def test_print_tile_revealed_bomb(self):
         self.tile.reveal()

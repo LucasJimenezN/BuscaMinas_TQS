@@ -43,12 +43,12 @@ class TestBoardController(unittest.TestCase):
         self.assertFalse(self.controller.check_while_playing_game_user_input('a', "2"))
 
     def test_check_if_tile_is_valid(self):
-        self.assertTrue(self.controller.check_while_playing_game_user_input('A', "1"))
-        self.assertTrue(self.controller.check_while_playing_game_user_input('B', "2"))
-        self.assertTrue(self.controller.check_while_playing_game_user_input('C', "3"))
-        self.assertFalse(self.controller.check_while_playing_game_user_input('a', "-1"))
-        self.assertFalse(self.controller.check_while_playing_game_user_input('z', "0"))
-        self.assertFalse(self.controller.check_while_playing_game_user_input('6', "6"))
+        self.assertTrue(self.controller.check_if_tile_is_valid(1, 1))
+        self.assertTrue(self.controller.check_if_tile_is_valid(2, 2))
+        self.assertTrue(self.controller.check_if_tile_is_valid(0, 0))
+        self.assertTrue(self.controller.check_if_tile_is_valid(3, 3))
+        self.assertFalse(self.controller.check_if_tile_is_valid(-1, -1))
+        self.assertFalse(self.controller.check_if_tile_is_valid(-10, 6))
 
 
 if __name__ == '__main__':
