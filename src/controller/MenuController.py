@@ -1,8 +1,8 @@
 from src.view.PlayingMenuView import PlayingMenu as PM
 from src.view.RankingMenuView import print_ranking
-from src.controller.Exit import end_execution
+from src.controller.ExitController import end_execution
 from src.controller.RankingController import RankingController
-
+from allpairspy import AllPairs
 
 class MenuController:
 

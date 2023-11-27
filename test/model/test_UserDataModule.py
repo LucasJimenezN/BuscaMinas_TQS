@@ -1,45 +1,40 @@
 import unittest
-from src.model.connection import DB
+from unittest.mock import patch
 from src.model.userData import User
-from mock import patch
 
 
 class TestUser(unittest.TestCase):
     def setUp(self):
-        self.db = DB()
-        # Set up your test database or configure the connection as needed
-
-    def tearDown(self):
-        # Clean up or close any resources after each test if necessary
-        pass
-
-    def test_set_name(self):
-        user = User()
-        user.set_name("Alice")
-        self.assertEqual(user.get_name(), "Alice")
-
-    def test_set_score(self):
-        user = User()
-        user.set_score(90)
-        self.assertEqual(user.get_score(), 90)
-
-    def setUp(self):
         self.user = User()
 
-        # Testing getters and setters
-    def test_id(self):
+    def test_initialization(self):
+        self.assertIsNone(self.user.get_id())
+        self.assertIsNone(self.user.get_name())
+        self.assertIsNone(self.user.get_score())
+
+    def test_set_id(self):
         self.user.set_id(1)
         self.assertEqual(self.user.get_id(), 1)
 
-    def test_name(self):
-        self.user.set_name("Test")
-        self.assertEqual(self.user.get_name(), "Test")
+    def test_set_invalid_id(self):
+        self.user.set_id("string")
+        self.assertIsNone(self.user.get_id())
 
-    def test_score(self):
+    def test_set_name(self):
+        self.user.set_name("John")
+        self.assertEqual(self.user.get_name(), "John")
+
+    def test_set_invalid_name(self):
+        self.user.set_name(123)
+        self.assertIsNone(self.user.get_name())
+
+    def test_set_score(self):
         self.user.set_score(100)
         self.assertEqual(self.user.get_score(), 100)
 
-        # Mocking the DB class
+    def test_set_invalid_score(self):
+        self.user.set_score("string")
+        self.assertIsNone(self.user.get_score())
 
 
 if __name__ == '__main__':
