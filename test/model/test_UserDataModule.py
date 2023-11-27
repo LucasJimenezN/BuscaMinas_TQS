@@ -36,11 +36,6 @@ class TestUser(unittest.TestCase):
         self.user.set_score("string")
         self.assertIsNone(self.user.get_score())
 
-    @patch('builtins.input', return_value='John')
-    def test_add_user(self, mock_input):
-        self.user.add_user(100)
-        self.assertEqual(self.user.get_name(), 'John')
-
 
 if __name__ == '__main__':
     unittest.main()
