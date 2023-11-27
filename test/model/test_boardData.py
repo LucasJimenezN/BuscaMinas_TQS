@@ -7,6 +7,7 @@ class TestBoard(unittest.TestCase):
     def test_tile(self):
         tile = Tile()
         self.assertEqual(tile.is_bomb, False)
+        self.assertEqual(tile.is_revealed, False)
 
     def test_board(self):
         board1 = Board(1)

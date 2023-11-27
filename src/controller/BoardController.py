@@ -62,3 +62,22 @@ class BoardController:
         else:
             self.score = self.score + 10
             self.view.display_board()
+
+    def reveal_tile_test(self, x, y):
+        tile = self.board.get_tile(x, y)
+        if (tile.is_revealed == True):
+            self.view.display_already_revealed()
+        tile.reveal()
+
+        if tile.is_bomb:
+            self.view.display_board()
+            self.view.display_loss_message()
+            #User.add_user(self, self.score)
+            self.board.is_game_lost = True;
+        elif self.board.is_game_won():
+            self.view.display_board()
+            self.view.display_win_message()
+            #User.add_user(self, self.score)
+        else:
+            self.score = self.score + 10
+            self.view.display_board()
